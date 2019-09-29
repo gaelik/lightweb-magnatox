@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  autoconfigtox:
+    build:
+      context: .
+    networks:
+      - web
+    restart: always
+    container_name: autoconfigtox
+    labels:
+      - "traefik.frontend.rule=Host:autoconfig.mail.magnatox.com"
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.port=80"
+      - "traefik.protocol=http"
+      - "traefik.backend=autoconfigtox"
+     
+networks:
+  web:
+    external: true
